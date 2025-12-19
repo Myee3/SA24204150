@@ -1,0 +1,17 @@
+Package: SA24204150
+Type: Package
+Title: Example functions for 'Statistical Computing' course
+Version: 1.0
+Date: 2025-12-20
+Author: Mengyao Li
+Maintainer: Mengyao Li <lmmy@mail.ustc.edu.cn>
+Description: Several R and Rcpp function are included in this package for illustration. 
+License: GPL (>= 2)
+Imports: Rcpp, survival, stats
+Suggests: knitr, rmarkdown, microbenchmark, DAAG, boot, bootstrap, ggplot2, rbenchmark
+LinkingTo: Rcpp
+RoxygenNote: 7.3.3
+Encoding: UTF-8
+VignetteBuilder: knitr
+URL: http://github.com/Myee3/SA24204150
+BugReports: http://github.com/Myee3/SA24204150/issues

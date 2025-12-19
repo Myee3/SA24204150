@@ -1,0 +1,194 @@
+---
+title: "Introduction to SA24204150"
+author: "Li Mengyao"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to SA24204150}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Overview
+
+**SA24204150** is an R package developed for the *Statistical Computing* course.
+The package focuses on two aspects:
+
+1. **Survival analysis and model evaluation**, including
+
+   * estimation of the censoring survival function,
+   * Cox-model-based survival prediction,
+   * IPCW Brier score evaluation;
+
+2. **Algorithmic subset construction**, implemented using both R and C++ (via the R package *Rcpp*).
+
+Specifically, the package contains three R functions for survival analysis,
+namely *G.hat*, *S.hat*, and *bs*, as well as two Rcpp functions,
+*generate_subsetsC* and *generate_nested_subsetsC*,
+which are designed to efficiently generate subsets commonly used in greedy or sequential modeling procedures.
+
+---
+
+## Subset construction using Rcpp
+
+Subset generation is a fundamental building block in many statistical learning
+and model selection algorithms.
+In R, such operations are often implemented using high-level functions such as
+*combn*, which can be computationally expensive for large input sizes.
+In this package, two subset-generation functions are implemented in C++ using *Rcpp*.
+
+### Generating all non-empty subsets
+
+The Rcpp function *generate_subsetsC* generates all non-empty subsets of a given set.
+
+The source C++ code is as follows:
+
+List generate_subsetsC(IntegerVector set) {
+int n = set.size();
+int total = (1 << n);
+List subsets;
+
+for (int mask = 1; mask < total; ++mask) {
+IntegerVector subset;
+for (int i = 0; i < n; ++i) {
+if (mask & (1 << i)) {
+subset.push_back(set[i]);
+}
+}
+subsets.push_back(subset);
+}
+return subsets;
+}
+
+This implementation enumerates subsets using bit masking, which is both concise
+and efficient.
+
+An example usage is shown below.
+
+library(SA25204001)
+generate_subsetsC(1:3)
+
+---
+
+### Generating nested subsets
+
+In many greedy algorithms, only *nested* subsets are required.
+The function *generate_nested_subsetsC* generates the sequence
+
+[
+{1}, {1,2}, \ldots, {1,\ldots,n}.
+]
+
+The corresponding C++ code is:
+
+List generate_nested_subsetsC(IntegerVector set) {
+int n = set.size();
+List subsets(n);
+for (int i = 0; i < n; ++i) {
+subsets[i] = set[Range(0, i)];
+}
+return subsets;
+}
+
+An example is given below.
+
+generate_nested_subsetsC(1:5)
+
+---
+
+## Survival analysis functions
+
+In addition to subset construction, the package provides several R functions
+for survival analysis and prediction.
+
+### Estimation of the censoring survival function
+
+The function *G.hat* computes the Kaplan–Meier estimator of the censoring survival
+function, which is used for inverse probability of censoring weighting (IPCW).
+
+The R source code is:
+
+G.hat <- function(t, Dat) {
+newDat = list()
+newDat$x = Dat$x
+newDat$Delta = 1 - Dat$Delta
+newDat$Y = Dat$Y
+fit = survfit(Surv(Y, Delta) ~ 1, data = newDat)
+if (t <= fit$time[1]) {
+return(1)
+} else {
+q = max(which(fit$time <= t))
+return(fit$surv[q])
+}
+}
+
+An example of using *G.hat* is shown below.
+
+library(survival)
+set.seed(123)
+n <- 100
+Dat <- list(
+x = matrix(rnorm(n * 3), n, 3),
+Y = rexp(n),
+Delta = rbinom(n, 1, 0.7)
+)
+G.hat(0.5, Dat)
+
+---
+
+### Cox-model-based survival prediction
+
+The function *S.hat* fits a sequence of Cox proportional hazards models and
+predicts survival probabilities at a fixed time point.
+
+h <- 2
+newX <- Dat$x
+newX_test <- matrix(rnorm(50 * 3), 50, 3)
+
+Dat_test <- list(
+x = newX_test,
+Y = rexp(50),
+Delta = rbinom(50, 1, 0.7)
+)
+
+res <- S.hat(
+newX = newX,
+newX_test = newX_test,
+ns = n,
+ns_test = 50,
+t = 0.5,
+Datas = Dat,
+Datas_test = Dat_test
+)
+
+dim(res$S)
+
+---
+
+### IPCW Brier score
+
+Finally, the function *bs* computes the IPCW Brier score at a fixed time point.
+
+bs(
+newX = newX,
+newX_test = newX_test,
+ns = n,
+ns_test = 50,
+t = 0.5,
+Dat = Dat,
+Dat_test = Dat_test,
+k = 1
+)
+
+---
+
+## Conclusion
+
+This vignette demonstrates the usage of all major functions provided in the
+package **SA25204001**.
+The Rcpp functions offer efficient subset generation for algorithmic procedures,
+while the R functions focus on survival analysis and model evaluation.
+Together, they illustrate how R and C++ can be combined effectively in
+statistical computing.
+
+

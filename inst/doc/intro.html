@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Li Mengyao" />
+
+<meta name="date" content="2025-12-20" />
+
+<title>Introduction to SA24204150</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to SA24204150</h1>
+<h4 class="author">Li Mengyao</h4>
+<h4 class="date">2025-12-20</h4>
+
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p><strong>SA24204150</strong> is an R package developed for the
+<em>Statistical Computing</em> course. The package focuses on two
+aspects:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Survival analysis and model evaluation</strong>,
+including</p>
+<ul>
+<li>estimation of the censoring survival function,</li>
+<li>Cox-model-based survival prediction,</li>
+<li>IPCW Brier score evaluation;</li>
+</ul></li>
+<li><p><strong>Algorithmic subset construction</strong>, implemented
+using both R and C++ (via the R package <em>Rcpp</em>).</p></li>
+</ol>
+<p>Specifically, the package contains three R functions for survival
+analysis, namely <em>G.hat</em>, <em>S.hat</em>, and <em>bs</em>, as
+well as two Rcpp functions, <em>generate_subsetsC</em> and
+<em>generate_nested_subsetsC</em>, which are designed to efficiently
+generate subsets commonly used in greedy or sequential modeling
+procedures.</p>
+<hr />
+</div>
+<div id="subset-construction-using-rcpp" class="section level2">
+<h2>Subset construction using Rcpp</h2>
+<p>Subset generation is a fundamental building block in many statistical
+learning and model selection algorithms. In R, such operations are often
+implemented using high-level functions such as <em>combn</em>, which can
+be computationally expensive for large input sizes. In this package, two
+subset-generation functions are implemented in C++ using
+<em>Rcpp</em>.</p>
+<div id="generating-all-non-empty-subsets" class="section level3">
+<h3>Generating all non-empty subsets</h3>
+<p>The Rcpp function <em>generate_subsetsC</em> generates all non-empty
+subsets of a given set.</p>
+<p>The source C++ code is as follows:</p>
+<p>List generate_subsetsC(IntegerVector set) { int n = set.size(); int
+total = (1 &lt;&lt; n); List subsets;</p>
+<p>for (int mask = 1; mask &lt; total; ++mask) { IntegerVector subset;
+for (int i = 0; i &lt; n; ++i) { if (mask &amp; (1 &lt;&lt; i)) {
+subset.push_back(set[i]); } } subsets.push_back(subset); } return
+subsets; }</p>
+<p>This implementation enumerates subsets using bit masking, which is
+both concise and efficient.</p>
+<p>An example usage is shown below.</p>
+<p>library(SA25204001) generate_subsetsC(1:3)</p>
+<hr />
+</div>
+<div id="generating-nested-subsets" class="section level3">
+<h3>Generating nested subsets</h3>
+<p>In many greedy algorithms, only <em>nested</em> subsets are required.
+The function <em>generate_nested_subsetsC</em> generates the
+sequence</p>
+<p>[ {1}, {1,2}, , {1,,n}.]</p>
+<p>The corresponding C++ code is:</p>
+<p>List generate_nested_subsetsC(IntegerVector set) { int n =
+set.size(); List subsets(n); for (int i = 0; i &lt; n; ++i) { subsets[i]
+= set[Range(0, i)]; } return subsets; }</p>
+<p>An example is given below.</p>
+<p>generate_nested_subsetsC(1:5)</p>
+<hr />
+</div>
+</div>
+<div id="survival-analysis-functions" class="section level2">
+<h2>Survival analysis functions</h2>
+<p>In addition to subset construction, the package provides several R
+functions for survival analysis and prediction.</p>
+<div id="estimation-of-the-censoring-survival-function" class="section level3">
+<h3>Estimation of the censoring survival function</h3>
+<p>The function <em>G.hat</em> computes the Kaplan–Meier estimator of
+the censoring survival function, which is used for inverse probability
+of censoring weighting (IPCW).</p>
+<p>The R source code is:</p>
+<p>G.hat &lt;- function(t, Dat) { newDat = list() newDat<span class="math inline">\(x = Dat\)</span>x newDat<span class="math inline">\(Delta = 1 - Dat\)</span>Delta newDat<span class="math inline">\(Y = Dat\)</span>Y fit = survfit(Surv(Y, Delta) ~
+1, data = newDat) if (t &lt;= fit<span class="math inline">\(time[1]) {
+return(1) } else { q = max(which(fit\)</span>time &lt;= t))
+return(fit$surv[q]) } }</p>
+<p>An example of using <em>G.hat</em> is shown below.</p>
+<p>library(survival) set.seed(123) n &lt;- 100 Dat &lt;- list( x =
+matrix(rnorm(n * 3), n, 3), Y = rexp(n), Delta = rbinom(n, 1, 0.7) )
+G.hat(0.5, Dat)</p>
+<hr />
+</div>
+<div id="cox-model-based-survival-prediction" class="section level3">
+<h3>Cox-model-based survival prediction</h3>
+<p>The function <em>S.hat</em> fits a sequence of Cox proportional
+hazards models and predicts survival probabilities at a fixed time
+point.</p>
+<p>h &lt;- 2 newX &lt;- Dat$x newX_test &lt;- matrix(rnorm(50 * 3), 50,
+3)</p>
+<p>Dat_test &lt;- list( x = newX_test, Y = rexp(50), Delta = rbinom(50,
+1, 0.7) )</p>
+<p>res &lt;- S.hat( newX = newX, newX_test = newX_test, ns = n, ns_test
+= 50, t = 0.5, Datas = Dat, Datas_test = Dat_test )</p>
+<p>dim(res$S)</p>
+<hr />
+</div>
+<div id="ipcw-brier-score" class="section level3">
+<h3>IPCW Brier score</h3>
+<p>Finally, the function <em>bs</em> computes the IPCW Brier score at a
+fixed time point.</p>
+<p>bs( newX = newX, newX_test = newX_test, ns = n, ns_test = 50, t =
+0.5, Dat = Dat, Dat_test = Dat_test, k = 1 )</p>
+<hr />
+</div>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>This vignette demonstrates the usage of all major functions provided
+in the package <strong>SA25204001</strong>. The Rcpp functions offer
+efficient subset generation for algorithmic procedures, while the R
+functions focus on survival analysis and model evaluation. Together,
+they illustrate how R and C++ can be combined effectively in statistical
+computing.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
