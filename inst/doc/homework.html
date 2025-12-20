@@ -12,7 +12,7 @@
 
 <meta name="author" content="Li Mengyao" />
 
-<meta name="date" content="2025-12-20" />
+<meta name="date" content="2025-12-21" />
 
 <title>Homework</title>
 
@@ -340,7 +340,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Homework</h1>
 <h4 class="author">Li Mengyao</h4>
-<h4 class="date">2025-12-20</h4>
+<h4 class="date">2025-12-21</h4>
 
 
 
@@ -780,7 +780,7 @@ Gamma(r,\beta)\)</span>, 再对每一个<span class="math inline">\(\Lambda\)</s
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  an[i] <span class="ot">=</span> bm<span class="sc">$</span>elapsed </span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>an</span></code></pre></div>
-<pre><code>## [1] 0.22 0.39 0.68 0.94 1.22</code></pre>
+<pre><code>## [1] 0.19 0.28 0.49 0.69 0.96</code></pre>
 <p>建立线性回归模型并画图：</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>tn <span class="ot">=</span> n <span class="sc">*</span> <span class="fu">log</span>(n)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">lm</span>(an <span class="sc">~</span> tn)</span>
@@ -790,19 +790,19 @@ Gamma(r,\beta)\)</span>, 再对每一个<span class="math inline">\(\Lambda\)</s
 ## lm(formula = an ~ tn)
 ## 
 ## Residuals:
-##         1         2         3         4         5 
-## -0.028344  0.012858  0.028413  0.001249 -0.014176 
+##          1          2          3          4          5 
+##  0.0089863 -0.0004536 -0.0023425 -0.0240518  0.0178616 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 1.364e-01  2.102e-02    6.49  0.00743 ** 
-## tn          1.215e-06  3.864e-08   31.45 7.06e-05 ***
+## (Intercept) 9.458e-02  1.482e-02   6.382  0.00779 ** 
+## tn          9.384e-07  2.725e-08  34.434 5.39e-05 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.02568 on 3 degrees of freedom
-## Multiple R-squared:  0.997,  Adjusted R-squared:  0.996 
-## F-statistic: 989.2 on 1 and 3 DF,  p-value: 7.062e-05</code></pre>
+## Residual standard error: 0.01811 on 3 degrees of freedom
+## Multiple R-squared:  0.9975, Adjusted R-squared:  0.9966 
+## F-statistic:  1186 on 1 and 3 DF,  p-value: 5.385e-05</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>tn, <span class="at">y=</span>an, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>,</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(t[n]),</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="fu">expression</span>(a[n]),</span>
@@ -810,7 +810,7 @@ Gamma(r,\beta)\)</span>, 再对每一个<span class="math inline">\(\Lambda\)</s
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Computation Time&quot;</span>, <span class="st">&quot;Regression line&quot;</span>), </span>
 <span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="cn">NA</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">1</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 <p>可以看到花费时间基本与复杂度<span class="math inline">\(t_n=n\log(n)\)</span>成正比。</p>
 </div>
 </div>
@@ -2639,9 +2639,9 @@ R function you wrote before using the function “qqplot”.</p>
 <span id="cb115-8"><a href="#cb115-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb115-9"><a href="#cb115-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(bench)</span></code></pre></div>
 <pre><code>## Unit: milliseconds
-##  expr      min        lq      mean    median        uq      max neval cld
-##     R 703.9402 727.47305 742.88051 741.23120 753.01655 798.0564    20  a 
-##  Rcpp  27.4069  28.38485  29.06705  29.00305  29.91915  30.8750    20   b</code></pre>
+##  expr      min        lq     mean   median       uq      max neval cld
+##     R 616.6835 623.91055 638.6498 628.0787 638.6369 744.5237    20  a 
+##  Rcpp  26.1565  26.42045  27.6865  26.7752  27.6521  33.8418    20   b</code></pre>
 <p>使用 qqplot 比较 R 与 Rcpp 生成的样本，可以发现生成的样本点基本落在
 y=x 附近，说明两种编码方式实现的方法得到的后验分布是相同的。而 使用
 microbenchmark 比较运行时间，可以发现 Rcpp 版本远远快于 R

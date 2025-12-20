@@ -22,9 +22,6 @@ A numeric scalar giving \eqn{\hat G(t)}.
 \description{
 Compute \eqn{\hat G(t)} using a Kaplan–Meier estimator for the censoring
 distribution, which is used for inverse probability of censoring weighting (IPCW).
-
-The function internally flips the event indicator so that censoring is treated
-as the event: \code{Delta_c = 1 - Delta}.
 }
 \details{
 If \code{t} is smaller than the first observed time in the fitted Kaplan–Meier

@@ -24,19 +24,17 @@ Use the R package knitr to produce at least 3 examples. For each example, texts 
 
 ### Example 1
 
-洗好一副编号分别为1,2,…,54 的纸牌，依次抽取出来，若第次抽取到编号的纸牌则称为成功抽取。编写程序估计成功抽取个数的期望和方差，推导理论公式并与模拟结果进行比较。
- 
-#### 1.1  理论推导
+洗好一副编号分别为1,2,...,54 的纸牌，依次抽取出来，若第次抽取到编号的纸牌则称为成功抽取。编写程序估计成功抽取个数的期望和方差，推导理论公式并与模拟结果进行比较。
 
-根据题意，引入 
-$$
+#### 1.1 理论推导
+
+根据题意，引入 $$
 X_i=
 \begin{cases}
   1 & \text{若第i次抽到编号为i的纸牌};\\
   0 & \text{若第i次未抽到编号为i的纸牌}.\\
 \end{cases}
-$$ 
-则有$T=\sum\limits_{i=1}^{54}X_i$,易知$E(X_i)=\frac{1}{54}$, $Var(X_i)=\frac{53}{54^2}$,故理论上T的期望$E(T)=E(\sum\limits_{i=1}^{54}X_i)=\sum\limits_{i=1}^{54}E(X_i)=\sum\limits_{i=1}^{54}\frac{1}{54}=1$, T的方差$Var(T)=Var(\sum\limits_{i=1}^{54}X_i)=\sum\limits_{i=1}^{54}Var(X_i)=\sum\limits_{i=1}^{54}\frac{53}{54^2}=\frac{53}{54}=0.9814815$.
+$$ 则有$T=\sum\limits_{i=1}^{54}X_i$,易知$E(X_i)=\frac{1}{54}$, $Var(X_i)=\frac{53}{54^2}$,故理论上T的期望$E(T)=E(\sum\limits_{i=1}^{54}X_i)=\sum\limits_{i=1}^{54}E(X_i)=\sum\limits_{i=1}^{54}\frac{1}{54}=1$, T的方差$Var(T)=Var(\sum\limits_{i=1}^{54}X_i)=\sum\limits_{i=1}^{54}Var(X_i)=\sum\limits_{i=1}^{54}\frac{53}{54^2}=\frac{53}{54}=0.9814815$.
 
 #### 1.2 模拟验证
 
@@ -66,7 +64,6 @@ hist(t,
 
 可以发现模拟结果与理论推导结果非常接近。
 
-
 ### Example 2
 
 使用变换法生成Beta(n,1)分布的随机数，其中图像中使用黑线表示经验分布，红线表示理论分布：
@@ -86,7 +83,6 @@ y <- seq(min(t), max(t), 0.01)
 lines(y, pbeta(y, shape1 = 5,shape2 = 1), 
       col="red", type="h", lwd=2)
 ```
-
 
 ### Example 3
 
@@ -111,7 +107,7 @@ lines(y, pcauchy(y), col="red", type="h", lwd=2)
 
 ## 3.4
 
-由密度函数$f(x)=\frac{x}{\sigma^2}e^{-x^2/(2\sigma^2)},\ x\ge 0,\ \sigma>0$，可以得到分布函数$F(x)=1-e^{\frac{-x^2}{2\sigma^2}}$. 令随机变量$U \sim U(0,1)$，则$X\sim \sigma\sqrt{-2log(1-U)}$. 利用逆变换法生成服从Rayleigh($\sigma$)分布的随机变量X: 
+由密度函数$f(x)=\frac{x}{\sigma^2}e^{-x^2/(2\sigma^2)},\ x\ge 0,\ \sigma>0$，可以得到分布函数$F(x)=1-e^{\frac{-x^2}{2\sigma^2}}$. 令随机变量$U \sim U(0,1)$，则$X\sim \sigma\sqrt{-2log(1-U)}$. 利用逆变换法生成服从Rayleigh($\sigma$)分布的随机变量X:
 
 ```{r, fig.width=10, fig.height=8}
 set.seed(123)
@@ -182,7 +178,6 @@ comparison_r <- data.frame(
 )
 comparison_r
 ```
-
 
 ## 3.7
 
@@ -416,7 +411,7 @@ Question: Obtain the stratified importance sampling estimate in Example 6.14 and
 
 Answer:
 
-1. 编写数据生成函数，并将结果存储在gen_data.RData文件中：
+1.  编写数据生成函数，并将结果存储在gen_data.RData文件中：
 
 ```{r}
 rm(list = ls())
@@ -442,7 +437,7 @@ res = gen_data(m, K, seed)
 save(res, file = "E:/code/gen_data.RData")
 ```
 
-2. 统计推断部分，并在运行前清空内存，加载生成的数据：
+2.  统计推断部分，并在运行前清空内存，加载生成的数据：
 
 ```{r}
 rm(list = ls())
@@ -467,7 +462,7 @@ inf = as.data.frame(stat_infer(data = res))
 write.csv(inf, file = "E:/code/newinf.csv")
 ```
 
-3. 输出结果：
+3.  输出结果：
 
 ```{r}
 rm(list = ls())
@@ -492,7 +487,7 @@ Question: Plot the power curves for the t-test in Example 7.9 for sample sizes 1
 
 Answer:
 
-1. 生成并存储模拟数据：
+1.  生成并存储模拟数据：
 
 ```{r}
 rm(list = ls())
@@ -519,7 +514,7 @@ res = gen_data(
 save(res, file = "E:/code/gen_data1.RData")
 ```
 
-2. 计算功效：
+2.  计算功效：
 
 ```{r}
 rm(list = ls())
@@ -542,7 +537,7 @@ inf = calc_power(res, 500, 0.05)
 write.csv(inf, "E:/code/inf1.csv")
 ```
 
-3. 结果输出函数:
+3.  结果输出函数:
 
 ```{r}
 rm(list = ls())
@@ -577,7 +572,7 @@ Question: Suppose a 95% symmetric t-interval is applied to estimate a mean, but 
 
 Answer:
 
-1. 使用蒙特卡洛来模拟t区间并计算覆盖率：
+1.  使用蒙特卡洛来模拟t区间并计算覆盖率：
 
 ```{r}
 rm(list = ls())
@@ -624,7 +619,7 @@ report_result(inf)
 
 ```
 
-2. 按照Eg7.4中的正态分布区间计算覆盖率：
+2.  按照Eg7.4中的正态分布区间计算覆盖率：
 
 ```{r}
 rm(list = ls())
@@ -679,7 +674,7 @@ Question: Use Monte Carlo simulation to investigate whether the empirical Type I
 
 Answer:
 
-1. U(0,2)分布：
+1.  U(0,2)分布：
 
 ```{r}
 rm(list = ls())
@@ -719,7 +714,7 @@ report_result(inf)
 
 可以看到对于U(0,2)分布，经验一类错误率为0.053，很接近0.05，说明对轻微偏离正态性的分布来说t检验具有稳健性。
 
-2. $\chi^2(1)$分布：
+2.  $\chi^2(1)$分布：
 
 ```{r}
 rm(list = ls())
@@ -757,7 +752,7 @@ report_result <- function(inf){
 report_result(inf)
 ```
 
-3. Exp(1)分布：
+3.  Exp(1)分布：
 
 ```{r}
 rm(list = ls())
@@ -851,7 +846,8 @@ result_multi()
 
 ## 8.4
 
-### Question 
+### Question
+
 Refer to the air-conditioning data set aircondit provided in the boot package. The 12 observations are the times in hours between failures of air-conditioning equipment [68, Example 1.1]: 3, 5,7,18,43,85,91,98,100,130,230,487. Assume that the times between failures follow an exponential model Exp(λ). Obtain the MLE of the hazard rate λ and use bootstrap to estimate the bias and standard error of the estimate.
 
 ### Answer
@@ -894,8 +890,7 @@ result_aircond("aircond_step2.rds")
 
 ### Question
 
-Refer to Exercise 8.6. Efron and Tibshirani discuss the following example [91, Chapter 7]. The five-dimensional scores data have a 5×5 covariance matrix Σ, with positive eigenvalues $λ_1 > ··· > λ_5$. In principal components analysis,$$\theta=\frac{\lambda_1}{\sum_{j=1}^5\lambda_j}$$ measures the proportion of variance explained by the first principal component. Let $\hat{λ}_1 > ··· > \hat{λ}_5$ be the eigenvalues of $\hat{\Sigma}$, where $\hat{\Sigma}$ is the MLE of $\Sigma$. Compute the sample estimate
-$$\hat{\theta}=\frac{\hat{\lambda}_1}{\sum_{j=1}^5\hat{\lambda}_j}$$ of $\theta$. Use bootstrap to estimate the bias and standard error of $\hat{\theta}$.
+Refer to Exercise 8.6. Efron and Tibshirani discuss the following example [91, Chapter 7]. The five-dimensional scores data have a 5×5 covariance matrix Σ, with positive eigenvalues $λ_1 > ··· > λ_5$. In principal components analysis,$$\theta=\frac{\lambda_1}{\sum_{j=1}^5\lambda_j}$$ measures the proportion of variance explained by the first principal component. Let $\hat{λ}_1 > ··· > \hat{λ}_5$ be the eigenvalues of $\hat{\Sigma}$, where $\hat{\Sigma}$ is the MLE of $\Sigma$. Compute the sample estimate $$\hat{\theta}=\frac{\hat{\lambda}_1}{\sum_{j=1}^5\hat{\lambda}_j}$$ of $\theta$. Use bootstrap to estimate the bias and standard error of $\hat{\theta}$.
 
 ### Answer
 
@@ -1051,9 +1046,8 @@ c(mean(e1^2), mean(e2^2), mean(e3^2), mean(e4^2))
 
 ### Question:
 
-Conduct a Monte Carlo study to estimate the coverage probabilities of the standard normal bootstrap confidence interval, the basic bootstrap confidence interval, and the percentile confidence interval. Sample from a normal population and check the empirical coverage rates for the
- sample mean. Find the proportion of times that the confidence intervals miss on the left, and the porportion of times that the confidence intervals miss on the right.
- 
+Conduct a Monte Carlo study to estimate the coverage probabilities of the standard normal bootstrap confidence interval, the basic bootstrap confidence interval, and the percentile confidence interval. Sample from a normal population and check the empirical coverage rates for the sample mean. Find the proportion of times that the confidence intervals miss on the left, and the porportion of times that the confidence intervals miss on the right.
+
 ### Answer:
 
 ```{r}
@@ -1111,24 +1105,15 @@ round(res, 4)
 
 ## Question
 
-Suppose the population has the exponential distribution with rate $\lambda$.  
-The MLE of $\lambda$ is
-$\hat{\lambda} = \frac{1}{\bar{X}},$
-where $\bar{X}$ is the sample mean.
-It can be derived that
-$E(\hat{\lambda}) = \lambda \frac{n}{n-1},$
-so the estimation bias is
-$\text{bias}(\hat{\lambda}) = \frac{\lambda}{n-1}.$
-The standard error of $\hat{\lambda}$ is
-$\text{se}(\hat{\lambda}) = \frac{\lambda n}{(n-1)\sqrt{n-2}}.$
-Conduct a simulation study to verify the performance of the bootstrap method.
+Suppose the population has the exponential distribution with rate $\lambda$.\
+The MLE of $\lambda$ is $\hat{\lambda} = \frac{1}{\bar{X}},$ where $\bar{X}$ is the sample mean. It can be derived that $E(\hat{\lambda}) = \lambda \frac{n}{n-1},$ so the estimation bias is $\text{bias}(\hat{\lambda}) = \frac{\lambda}{n-1}.$ The standard error of $\hat{\lambda}$ is $\text{se}(\hat{\lambda}) = \frac{\lambda n}{(n-1)\sqrt{n-2}}.$ Conduct a simulation study to verify the performance of the bootstrap method.
 
-- The true value of $\lambda = 2$.
-- The sample size $n = 5, 10, 20$.
-- The number of bootstrap replicates $B = 1000$.
-- Repeat simulations for $m = 1000$ times.
-- Compare the **mean bootstrap bias** and **bootstrap standard error** with the theoretical ones.
-- Comment on the results.
+-   The true value of $\lambda = 2$.
+-   The sample size $n = 5, 10, 20$.
+-   The number of bootstrap replicates $B = 1000$.
+-   Repeat simulations for $m = 1000$ times.
+-   Compare the **mean bootstrap bias** and **bootstrap standard error** with the theoretical ones.
+-   Comment on the results.
 
 ### Answer
 
@@ -1187,8 +1172,8 @@ print(res)
 
 ### Question
 
- Implement the two-sample Cramér-von Mises test for equal distributions as a permutation test using (10.14). Apply the test to the data in Examples 10.1 and 10.2.
- 
+Implement the two-sample Cramér-von Mises test for equal distributions as a permutation test using (10.14). Apply the test to the data in Examples 10.1 and 10.2.
+
 ### Answer
 
 ```{r}
@@ -1235,7 +1220,7 @@ p
 
 ### Question
 
- The Count 5 test for equal variances in Section 7.4 is based on the maximum number of extreme points. Example 7.15 shows that the Count 5 criterion is not applicable for unequal sample sizes. Implement a permutation test for equal variance based on the maximum number of extreme points that applies when sample sizes are not necessarily equal. Repeat Example 7.15 using the permutation test.
+The Count 5 test for equal variances in Section 7.4 is based on the maximum number of extreme points. Example 7.15 shows that the Count 5 criterion is not applicable for unequal sample sizes. Implement a permutation test for equal variance based on the maximum number of extreme points that applies when sample sizes are not necessarily equal. Repeat Example 7.15 using the permutation test.
 
 ### Answer
 
@@ -1292,35 +1277,31 @@ cat(sprintf("样本量为20/50下的经验 Type I 错误率: %.4f\n", alphahat_c
 
 ### Question
 
- Prove that the stationary distribution of the M-H sampler with proposal distribution g(r|s) is the target distribution f (x) in the CONTINUOUS case.
+Prove that the stationary distribution of the M-H sampler with proposal distribution g(r\|s) is the target distribution f (x) in the CONTINUOUS case.
 
 ### Answer
 
-我们需要证明 $f$ 为平稳分布，即
-\[
+我们需要证明 $f$ 为平稳分布，即 $$
 \int f(s)\,K(r,s)\,ds \;=\; f(r).
-\]
+$$
 
-其中，$f(x)$为目标分布，$g(r \mid s)$为建议概率分布，接受概率
-\[
+其中，$f(x)$为目标分布，$g(r \mid s)$为建议概率分布，接受概率 $$
 \alpha(s,r) \;=\; \min\!\left\{\,1,\ \frac{f(r)\,g(s\mid r)}{f(s)\,g(r\mid s)}\right\}.
-\]
+$$
 
 从而有转移概率核
 
-\[
+$$
 K(r,s)
 = \mathbf{I}(s\neq r)\,\alpha(r,s)\,g(s\mid r)
 \;+\; \mathbf{I}(s=r)\Big[\,1-\!\int \alpha(r,s)\,g(s\mid r)\,\Big].
-\]
+$$
 
-我们首先需要证明
-\[
+我们首先需要证明 $$
 f(s)\,K(r,s) \;=\; f(r)\,K(s,r).
-\]
+$$
 
-对 $s\neq r$，
-\[
+对 $s\neq r$， $$
 \begin{aligned}
 f(s)\,K(r,s)
 &= f(s)\,\alpha(r,s)\,g(s\mid r) \\
@@ -1328,10 +1309,9 @@ f(s)\,K(r,s)
    \min\!\left\{1,\ \frac{f(r)\,g(s\mid r)}{f(s)\,g(r\mid s)}\right\} \\
 &= \min\!\big\{f(s)\,g(s\mid r),\ f(r)\,g(r\mid s)\big\}.
 \end{aligned}
-\]
+$$
 
-同理，
-\[
+同理， $$
 \begin{aligned}
 f(r)\,K(s,r)
 &= f(r)\,\alpha(s,r)\,g(r\mid s) \\
@@ -1339,21 +1319,19 @@ f(r)\,K(s,r)
    \min\!\left\{1,\ \frac{f(s)\,g(r\mid s)}{f(r)\,g(s\mid r)}\right\} \\
 &= \min\!\big\{f(r)\,g(r\mid s),\ f(s)\,g(s\mid r)\big\}.
 \end{aligned}
-\]
+$$
 
 因此有$f(s)\,K(r,s)=f(r)\,K(s,r)$ 成立。
 
-接着，两边对 $s$ 积分：
-\[
+接着，两边对 $s$ 积分： $$
 \int f(s)\,K(r,s)\,ds
 = \int f(r)\,K(s,r)\,ds
 = f(r)\int K(s,r)\,ds.
-\]
+$$
 
-因为 $K(\cdot,r)$ 是转移核，$\int K(s,r)\,ds=1$，于是有
-\[
+因为 $K(\cdot,r)$ 是转移核，$\int K(s,r)\,ds=1$，于是有 $$
 \int f(s)\,K(r,s)\,ds \;=\; f(r).
-\]
+$$
 
 得证。
 
@@ -1410,8 +1388,7 @@ par(op)
 
 ### Question
 
-This example appears in [41]. Consider the bivariate density
-$$f(x, y) \propto \binom{n}{x} \, y^{x + a - 1}(1 - y)^{n - x + b - 1},
+This example appears in [41]. Consider the bivariate density $$f(x, y) \propto \binom{n}{x} \, y^{x + a - 1}(1 - y)^{n - x + b - 1},
 \quad x = 0, 1, \ldots, n, \; 0 \le y \le 1.$$
 
 It can be shown (see, e.g., [26]) that for fixed a,b,n, the conditional distributions are Binomial(n,y) and Beta(x + a,n − x + b). Use the Gibbs sampler to generate a chain with target joint density f(x,y).
@@ -1478,7 +1455,7 @@ sim = gibbs_xy(truth, n_iter = 20000, burnin = 2000, y0 = 0.5, seed = 11)
 report_xy(sim)
 ```
 
-## More 
+## More
 
 ### Question
 
@@ -1598,7 +1575,6 @@ grX = gr_for_gibbs(truth, k = 4, n_iter = 15000, burnin = 1000,
                    variable = "X", y0_vec = y0s, seeds = 21:24)
 ```
 
-
 ## 4
 
 ### Question(1)
@@ -1655,14 +1631,13 @@ plot(-log(out_tab$f0), out_tab$alpha, type = "b", pch = 19,
      xlab = expression(-log(f[0])), ylab = "alpha")
 ```
 
-
 # 1117
 
 ## 11.4
 
 ### Question
 
-Refer to the Bayesian prediction application in Example 11.3, with the Geometric\((p)\) survival model.  
+Refer to the Bayesian prediction application in Example 11.3, with the Geometric$(p)$ survival model.\
 Prove that the derived parameter $\psi(p) = \frac{p}{1-p}$ does not depend on attained age of the individual in this model.
 
 ### Answer
@@ -1675,25 +1650,21 @@ $$
 
 其中$0 < p < 1$。
 
-给定个体已经活到了时间$a$,即$T \ge a$时，记它的未来生存时间为$R_a := T-a. $ 对任意 $k = 0,1,2,\ldots$，有
-$$
+给定个体已经活到了时间$a$,即$T \ge a$时，记它的未来生存时间为\$R_a := T-a. \$ 对任意 $k = 0,1,2,\ldots$，有 $$
 \Pr(R_a = k)
 = \Pr(T = a + k \mid T \ge a)
 = \frac{\Pr(T = a + k,\, T \ge a)}{\Pr(T \ge a)}
 = \frac{\Pr(T = a + k)}{\Pr(T \ge a)}.
 $$
 
-由$T \sim \text{Geometric}(p)$知，$\Pr(T = a + k) = p^{a+k}(1-p),$ 又有
-$$
+由$T \sim \text{Geometric}(p)$知，$\Pr(T = a + k) = p^{a+k}(1-p),$ 又有 $$
 \Pr(T \ge a)
 = \sum_{j=a}^{\infty} \Pr(T=j)
 = \sum_{j=a}^{\infty} p^{j}(1-p)
 = (1-p)\,p^{a} \sum_{j=0}^{\infty} p^{j}
 = (1-p)\,p^{a} \cdot \frac{1}{1-p}
 = p^{a}.
-$$
-代入得
-$$
+$$ 代入得 $$
 \Pr(R_a = k)
 = \frac{p^{a+k}(1-p)}{p^{a}}
 = p^{k}(1-p), \quad k = 0,1,2,\ldots
@@ -1710,8 +1681,7 @@ $$
 = \mathbb{E}[T],
 $$
 
-由于对任意$a$，$R_a$ 仍服从 Geometric$(p)$分布，因此
-$$
+由于对任意$a$，$R_a$ 仍服从 Geometric$(p)$分布，因此 $$
 \mathbb{E}[T-a \mid T \ge a]
 = \mathbb{E}[R_a]
 = \frac{p}{1-p}.
@@ -1719,7 +1689,7 @@ $$
 
 它只依赖于参数 $p$，与生存年龄 $a$ 无关。
 
-综上，在 Geometric\((p)\) 生存模型下，$\psi(p) = \frac{p}{1-p}$与个体当前年龄 \(a\) 无关。
+综上，在 Geometric$(p)$ 生存模型下，$\psi(p) = \frac{p}{1-p}$与个体当前年龄 $a$ 无关。
 
 ## 14.1
 
@@ -1753,7 +1723,6 @@ sol = simplex(a = a, A1 = A1, b1 = b1, maxi = TRUE)
 sol
 ```
 
-
 ## 课后练习
 
 ### Question1:
@@ -1762,33 +1731,25 @@ sol
 
 ### Answer1：
 
-指数分布的累积分布函数为 $F(x) = 1 - e^{-\lambda x}$。观测数据为区间 $(U_i, V_i)$，则似然函数为：
-$$
+指数分布的累积分布函数为 $F(x) = 1 - e^{-\lambda x}$。观测数据为区间 $(U_i, V_i)$，则似然函数为： $$
 L(\lambda) = \prod_{i=1}^n P(u_i < X_i < v_i) = \prod_{i=1}^n \left( e^{-\lambda u_i} - e^{-\lambda v_i} \right)
 $$
 
-对数似然函数 $l(\lambda)$ 为：
-$$
+对数似然函数 $l(\lambda)$ 为： $$
 l(\lambda) = \sum_{i=1}^n \ln \left( e^{-\lambda u_i} - e^{-\lambda v_i} \right)
 $$
 
-为了求 MLE，令导数为 0：
-$$
+为了求 MLE，令导数为 0： $$
 \frac{\partial l(\lambda)}{\partial \lambda} = \sum_{i=1}^n \frac{\frac{\partial}{\partial \lambda}(e^{-\lambda u_i} - e^{-\lambda v_i})}{e^{-\lambda u_i} - e^{-\lambda v_i}} = \sum_{i=1}^n \frac{-u_i e^{-\lambda u_i} - (-v_i e^{-\lambda v_i})}{e^{-\lambda u_i} - e^{-\lambda v_i}} = 0
 $$
 
-整理得直接 MLE 满足的方程：
-$$
+整理得直接 MLE 满足的方程： $$
 \sum_{i=1}^n \frac{v_i e^{-\lambda v_i} - u_i e^{-\lambda u_i}}{e^{-\lambda u_i} - e^{-\lambda v_i}} = 0
 $$
 
-下面考虑EM算法，有E步 (Expectation Step):
-计算完全数据充分统计量的条件期望。对于指数分布，核心是计算 $X$ 在区间 $(u, v)$ 上的条件期望：
-$$
+下面考虑EM算法，有E步 (Expectation Step): 计算完全数据充分统计量的条件期望。对于指数分布，核心是计算 $X$ 在区间 $(u, v)$ 上的条件期望： $$
 E[X_i | u_i < X_i < v_i; \lambda^{(t)}] = \frac{\int_{u_i}^{v_i} x \lambda e^{-\lambda x} dx}{\int_{u_i}^{v_i} \lambda e^{-\lambda x} dx}
-$$
-利用分部积分法可得：
-$$
+$$ 利用分部积分法可得： $$
 \hat{x}_i^{(t)} = \frac{1}{\lambda^{(t)}} + \frac{u_i e^{-\lambda^{(t)} u_i} - v_i e^{-\lambda^{(t)} v_i}}{e^{-\lambda^{(t)} u_i} - e^{-\lambda^{(t)} v_i}}
 $$
 
@@ -1796,36 +1757,29 @@ M步利用填补后的数据更新参数。指数分布的 MLE 为样本均值�
 
 $$
 \lambda^{(t+1)} = \frac{n}{\sum_{i=1}^n \hat{x}_i^{(t)}}
-$$
-即迭代公式为：
-$$
+$$ 即迭代公式为： $$
 \frac{n}{\lambda^{(t+1)}} = \sum_{i=1}^n \left( \frac{1}{\lambda^{(t)}} + \frac{u_i e^{-\lambda^{(t)} u_i} - v_i e^{-\lambda^{(t)} v_i}}{e^{-\lambda^{(t)} u_i} - e^{-\lambda^{(t)} v_i}} \right)
 $$
 
-当 EM 算法收敛时，参数不再变化，即 $\lambda^{(t+1)} = \lambda^{(t)} = \hat{\lambda}$。
-将 $\hat{\lambda}$ 代入 M 步的迭代公式中：
+当 EM 算法收敛时，参数不再变化，即 $\lambda^{(t+1)} = \lambda^{(t)} = \hat{\lambda}$。 将 $\hat{\lambda}$ 代入 M 步的迭代公式中：
 
 $$
 \frac{n}{\hat{\lambda}} = \sum_{i=1}^n \left( \frac{1}{\hat{\lambda}} + \frac{u_i e^{-\hat{\lambda} u_i} - v_i e^{-\hat{\lambda} v_i}}{e^{-\hat{\lambda} u_i} - e^{-\hat{\lambda} v_i}} \right)
 $$
 
-将右侧求和展开：
-$$
+将右侧求和展开： $$
 \frac{n}{\hat{\lambda}} = \sum_{i=1}^n \frac{1}{\hat{\lambda}} + \sum_{i=1}^n \frac{u_i e^{-\hat{\lambda} u_i} - v_i e^{-\hat{\lambda} v_i}}{e^{-\hat{\lambda} u_i} - e^{-\hat{\lambda} v_i}}
 $$
 
-注意到 $\sum_{i=1}^n \frac{1}{\hat{\lambda}} = \frac{n}{\hat{\lambda}}$，因此方程两边消去该项，得到：
-$$
+注意到 $\sum_{i=1}^n \frac{1}{\hat{\lambda}} = \frac{n}{\hat{\lambda}}$，因此方程两边消去该项，得到： $$
 0 = \sum_{i=1}^n \frac{u_i e^{-\hat{\lambda} u_i} - v_i e^{-\hat{\lambda} v_i}}{e^{-\hat{\lambda} u_i} - e^{-\hat{\lambda} v_i}}
 $$
 
-将分子符号反转得到：
-$$
+将分子符号反转得到： $$
 \sum_{i=1}^n \frac{v_i e^{-\hat{\lambda} v_i} - u_i e^{-\hat{\lambda} u_i}}{e^{-\hat{\lambda} u_i} - e^{-\hat{\lambda} v_i}} = 0
 $$
 
-此方程与MLE方法的 Score Equation 完全一致。
-因此，EM 算法的收敛点 $\hat{\lambda}$ 满足似然方程，即 EM 算法收敛于观测数据的 MLE。
+此方程与MLE方法的 Score Equation 完全一致。 因此，EM 算法的收敛点 $\hat{\lambda}$ 满足似然方程，即 EM 算法收敛于观测数据的 MLE。
 
 ### Question2：
 
@@ -1941,13 +1895,14 @@ y = 6:10
 
 vmap(`+`, x, y, FUN.VALUE = numeric(1))
 ```
+
 可以看到是将所有输入重复进行相加操作。
 
 ## 4
 
 ### Question
 
-Make a faster version of chisq.test() that only computes the chi-square test statistic when the input is two numeric vectors with no missing values. You can try simplifying chisq.test() or by coding from the mathematical definition (http://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test).
+Make a faster version of chisq.test() that only computes the chi-square test statistic when the input is two numeric vectors with no missing values. You can try simplifying chisq.test() or by coding from the mathematical definition (<http://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test>).
 
 ### Answer
 
@@ -2008,14 +1963,13 @@ faster_chisq <- function(x, y) {
 
 ## Question1
 
- Write an Rcpp function for Exercise 11.8 (page 334, Statistical Computing with R, 2nd edition). 
+Write an Rcpp function for Exercise 11.8 (page 334, Statistical Computing with R, 2nd edition).
 
-Rao [232, Sec. 5g] presented an example on genetic linkage of 197 animals in four categories (also discussed in [70, 110, 179, 280]). The group sizes are (125,18,20,34). Assume that the probabilities of the corresponding multinomial distribution are $$(\frac{1}{2}+\frac{\theta}{4},\,\frac{1-\theta}{4},\,\frac{1-\theta}{4},\, \frac{\theta}{4}).$$
-Estimate the posterior distribution of θ given the observed sample, using one of the methods in this chapter.
+Rao [232, Sec. 5g] presented an example on genetic linkage of 197 animals in four categories (also discussed in [70, 110, 179, 280]). The group sizes are (125,18,20,34). Assume that the probabilities of the corresponding multinomial distribution are $$(\frac{1}{2}+\frac{\theta}{4},\,\frac{1-\theta}{4},\,\frac{1-\theta}{4},\, \frac{\theta}{4}).$$ Estimate the posterior distribution of θ given the observed sample, using one of the methods in this chapter.
 
 ## Answer
 
-我们采用Metropolis-Hastings采样方法估计$\theta，先给出MH采样方法的R语言版本:
+我们采用Metropolis-Hastings采样方法估计\$\theta，先给出MH采样方法的R语言版本:
 
 ```{r}
 n_obs = c(125, 18, 20, 34)
@@ -2109,7 +2063,6 @@ List rw_theta_cpp(int N, double theta0, double w, NumericVector n) {
 }
 ```
 
-
 ```{r}
 library(Rcpp)
 Rcpp::sourceCpp("E:/code/rw_theta.cpp")
@@ -2117,7 +2070,7 @@ Rcpp::sourceCpp("E:/code/rw_theta.cpp")
 
 ## Question2
 
-Compare the corresponding generated random numbers with those by the R function you wrote before using the function “qqplot”.
+Compare the corresponding generated random numbers with those by the R function you wrote before using the function "qqplot".
 
 ## Answer
 
@@ -2149,7 +2102,7 @@ abline(0, 1, col = 2, lwd = 2)
 
 ## Question3
 
-Compare the computation time of the two functions with the function “microbenchmark”.
+Compare the computation time of the two functions with the function "microbenchmark".
 
 ## Answer
 
@@ -2165,5 +2118,4 @@ bench <- microbenchmark(
 print(bench)
 ```
 
-使用 qqplot 比较 R 与 Rcpp 生成的样本，可以发现生成的样本点基本落在 y=x 附近，说明两种编码方式实现的方法得到的后验分布是相同的。而
-使用 microbenchmark 比较运行时间，可以发现 Rcpp 版本远远快于 R 版本，说明使用C++能大幅提升算法计算速度。
+使用 qqplot 比较 R 与 Rcpp 生成的样本，可以发现生成的样本点基本落在 y=x 附近，说明两种编码方式实现的方法得到的后验分布是相同的。而 使用 microbenchmark 比较运行时间，可以发现 Rcpp 版本远远快于 R 版本，说明使用C++能大幅提升算法计算速度。
