@@ -3,13 +3,11 @@
 NULL
 
 
-#' @title Kaplan–Meier estimator of the censoring survival function
+#' @title Kaplan–Meier estimator of the survival function with censoring
 #' @description
 #' Compute \eqn{\hat G(t)} using a Kaplan–Meier estimator for the censoring
 #' distribution, which is used for inverse probability of censoring weighting (IPCW).
 #'
-#' The function internally flips the event indicator so that censoring is treated
-#' as the event: \code{Delta_c = 1 - Delta}.
 #'
 #' @param t A time point at which \eqn{\hat G(t)} is evaluated (numeric scalar).
 #' @param Dat A data object containing at least \code{$x}, \code{$Delta}, and \code{$Y}.
