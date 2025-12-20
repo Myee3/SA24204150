@@ -11,23 +11,22 @@ vignette: >
 
 ## Overview
 
-**SA24204150** is an R package developed for the *Statistical Computing* course.
-The package focuses on two aspects:
+**SA24204150** is an R package developed for the Statistical Computing course.
+The package contain two parts:
 
-1. **Survival analysis and model evaluation**, including
+1. Survival analysis and model evaluation, including three functions:
 
    * estimation of the censoring survival function,
    * Cox-model-based survival prediction,
    * IPCW Brier score evaluation;
 
-2. **Algorithmic subset construction**, implemented using both R and C++ (via the R package *Rcpp*).
+2. **Algorithmic subset construction**, implemented by both R and C++.
 
 Specifically, the package contains three R functions for survival analysis,
-namely *G.hat*, *S.hat*, and *bs*, as well as two Rcpp functions,
+namely *G.hat*, *S.hat*, and *bs*, and two Rcpp functions,
 *generate_subsetsC* and *generate_nested_subsetsC*,
-which are designed to efficiently generate subsets commonly used in greedy or sequential modeling procedures.
+which are designed to generate subsets used in sequential modeling procedures.
 
----
 
 ## Subset construction using Rcpp
 
@@ -68,7 +67,6 @@ An example usage is shown below.
 library(SA25204001)
 generate_subsetsC(1:3)
 
----
 
 ### Generating nested subsets
 
@@ -94,7 +92,6 @@ An example is given below.
 
 generate_nested_subsetsC(1:5)
 
----
 
 ## Survival analysis functions
 
@@ -134,7 +131,6 @@ Delta = rbinom(n, 1, 0.7)
 )
 G.hat(0.5, Dat)
 
----
 
 ### Cox-model-based survival prediction
 
@@ -163,7 +159,6 @@ Datas_test = Dat_test
 
 dim(res$S)
 
----
 
 ### IPCW Brier score
 
@@ -180,7 +175,6 @@ Dat_test = Dat_test,
 k = 1
 )
 
----
 
 ## Conclusion
 
