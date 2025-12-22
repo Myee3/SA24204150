@@ -1050,7 +1050,7 @@ Conduct a Monte Carlo study to estimate the coverage probabilities of the standa
 
 ### Answer:
 
-```{r}
+```{r, eval=FALSE}
 set.seed(101)
 
 mc_boot_ci <- function(m = 1e4, n = 50, B = 1000, mu = 0) {
@@ -1117,7 +1117,7 @@ The MLE of $\lambda$ is $\hat{\lambda} = \frac{1}{\bar{X}},$ where $\bar{X}$ is 
 
 ### Answer
 
-```{r}
+```{r, eval=FALSE}
 set.seed(101)
 
 lambda_true = 2
@@ -1224,7 +1224,7 @@ The Count 5 test for equal variances in Section 7.4 is based on the maximum numb
 
 ### Answer
 
-```{r}
+```{r, eval=FALSE}
 count5test = function(x, y) {
  X = x - mean(x)
  Y = y - mean(y)
@@ -1406,7 +1406,7 @@ true <- function(n = 25, a = 2, b = 3) {
        Vy = a*b / ((a + b)^2 * (a + b + 1)))
 }
 
-gibbs_xy <- function(truth, n_iter = 20000, burnin = 2000, y0 = 0.5, seed = 123){
+gibbs_xy <- function(truth, n_iter = 10000, burnin = 2000, y0 = 0.5, seed = 123){
   set.seed(seed)
   n = truth$n
   a = truth$a
@@ -1451,7 +1451,7 @@ report_xy <- function(sim) {
 }
 
 truth = true(n = 25, a = 2, b = 3)
-sim = gibbs_xy(truth, n_iter = 20000, burnin = 2000, y0 = 0.5, seed = 11)
+sim = gibbs_xy(truth, n_iter = 10000, burnin = 2000, y0 = 0.5, seed = 11)
 report_xy(sim)
 ```
 
@@ -1510,7 +1510,7 @@ run_gr_for_sigma <- function(sigma = 2, k = 4, n = 15000, b = 1000,
 
 ```{r}
 sigmas = c(0.1, 0.5, 2, 16)
-res_list = lapply(sigmas, function(s) run_gr_for_sigma(sigma = s, k = 4, n = 20000, b = 1000))
+res_list = lapply(sigmas, function(s) run_gr_for_sigma(sigma = s, k = 4, n = 10000, b = 1000))
 
 for (i in seq_along(sigmas)) {
   cat(sprintf("sigma = %-5g : first iter with R-hat < 1.2 is %s\n",
@@ -1521,7 +1521,7 @@ for (i in seq_along(sigmas)) {
 
 对11.10的结果进行Gelman-Rubin方法诊断，给出$\hat{R}$的收敛轨迹：
 
-```{r, fig.width=10, fig.height=8}
+```{r, fig.width=10, fig.height=8, eval=FALSE}
 gr_for_gibbs <- function(truth,
                          k = 4, n_iter = 15000, burnin = 1000,
                          variable = c("Y","X"),
