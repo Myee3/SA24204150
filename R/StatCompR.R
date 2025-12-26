@@ -4,6 +4,7 @@ NULL
 
 
 #' @title Kaplan–Meier estimator of the survival function with censoring
+#' @name G.hat
 #' @description
 #' Compute \eqn{\hat G(t)} using a Kaplan–Meier estimator for the censoring
 #' distribution, which is used for inverse probability of censoring weighting (IPCW).
@@ -53,6 +54,7 @@ G.hat <- function(t, Dat) {
 
 
 #' @title Cox-model-based survival prediction across grouped covariates
+#' @name S.hat
 #' @description
 #' Fit a sequence of Cox proportional hazards models on grouped covariates and
 #' return predicted survival probabilities at a fixed time \code{t} for both
@@ -138,6 +140,7 @@ S.hat <- function(newX, newX_test, ns, ns_test, t, Datas, Datas_test, h) {
 
 
 #' @title IPCW Brier score at a fixed time for a selected candidate Cox model
+#' @name bs
 #' @description
 #' Compute the inverse-probability-of-censoring-weighted (IPCW) Brier score at time
 #' \code{t} for the \code{k}-th candidate Cox model produced by \code{\link{S.hat}}.

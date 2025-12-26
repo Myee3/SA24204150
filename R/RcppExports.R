@@ -2,15 +2,27 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @title Generate all non-empty subsets (Rcpp)
-NULL
-
-#' @title Generate nested subsets (Rcpp)
-NULL
-
+#' @name generatesubsetsC
+#' @description
+#' Generate all non-empty subsets of an input vector using C++.
+#'
+#' @param set An integer vector.
+#' @return A list containing all non-empty subsets.
+#'
+#' @export
 generate_subsetsC <- function(set) {
     .Call(`_SA24204150_generate_subsetsC`, set)
 }
 
+#' @title Generate nested subsets (Rcpp)
+#' @name generatenestedsubsetsC
+#' @description
+#' Generate nested subsets \{1\}, \{1,2\}, ..., \{1,...,n\} using C++.
+#'
+#' @param set An integer vector.
+#' @return A list of nested subsets.
+#'
+#' @export
 generate_nested_subsetsC <- function(set) {
     .Call(`_SA24204150_generate_nested_subsetsC`, set)
 }

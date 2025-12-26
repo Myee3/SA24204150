@@ -2,7 +2,7 @@
 % Please edit documentation in R/StatCompR.R
 \name{G.hat}
 \alias{G.hat}
-\title{Kaplan–Meier estimator of the censoring survival function}
+\title{Kaplan–Meier estimator of the survival function with censoring}
 \usage{
 G.hat(t, Dat)
 }

@@ -3,6 +3,8 @@
 export(G.hat)
 export(S.hat)
 export(bs)
+export(generate_nested_subsetsC)
+export(generate_subsetsC)
 importFrom(Rcpp,evalCpp)
 importFrom(survival,Surv)
 importFrom(survival,coxph)
