@@ -414,8 +414,6 @@ Answer:
 1.  编写数据生成函数，并将结果存储在gen_data.RData文件中：
 
 ```{r}
-rm(list = ls())
-
 rf3 <- function(n) { u <- runif(n); -log(1 - u*(1 - exp(-1))) }
 
 gen_data <- function(m, K, seed){
@@ -434,15 +432,11 @@ gen_data <- function(m, K, seed){
 }
 m = 1e4; K = 5; seed = 123
 res = gen_data(m, K, seed)
-save(res, file = "E:/code/gen_data.RData")
 ```
 
 2.  统计推断部分，并在运行前清空内存，加载生成的数据：
 
 ```{r}
-rm(list = ls())
-load("E:/code/gen_data.RData")
-
 stat_infer <- function(data){
   a = data$a; b = data$b; X = data$X; m_j = data$m_j; K = length(X)
   Pj = (exp(-a) - exp(-b))/(1 - exp(-1))         
@@ -459,15 +453,11 @@ stat_infer <- function(data){
 }
 
 inf = as.data.frame(stat_infer(data = res))
-write.csv(inf, file = "E:/code/newinf.csv")
 ```
 
 3.  输出结果：
 
 ```{r}
-rm(list = ls())
-inf = read.csv("E:/code/newinf.csv")
-
 print_results <- function(inf){
   out <- data.frame(
     method = c("Eg6.14", "Eg6.11"),
@@ -490,9 +480,7 @@ Answer:
 1.  生成并存储模拟数据：
 
 ```{r}
-rm(list = ls())
-
-gen_data <- function( n_seq, mu_seq, sigma, m, file){
+gen_data <- function( n_seq, mu_seq, sigma, m){
   set.seed(123)
   dat <- list()
   for(n in n_seq){
@@ -507,18 +495,13 @@ gen_data <- function( n_seq, mu_seq, sigma, m, file){
 res = gen_data(
   n_seq = c(10,20,30,40,50),
   mu_seq = seq(450,650,10),
-  sigma = 100, m = 1000,
-  file = "gen_data.rds"
+  sigma = 100, m = 1000
 )
-
-save(res, file = "E:/code/gen_data1.RData")
 ```
 
 2.  计算功效：
 
 ```{r}
-rm(list = ls())
-load("E:/code/gen_data1.RData")
 calc_power <- function(res, mu0, alpha){
   dat <- res
   inf <- data.frame(n = numeric(), mu = numeric(), power = numeric())
@@ -534,14 +517,11 @@ calc_power <- function(res, mu0, alpha){
   inf
 }
 inf = calc_power(res, 500, 0.05)
-write.csv(inf, "E:/code/inf1.csv")
 ```
 
 3.  结果输出函数:
 
 ```{r}
-rm(list = ls())
-inf = read.csv("E:/code/inf1.csv")
 plot_power <- function(inf){
   cols = 1:length(unique(inf$n))
   plot(NA, xlim = range(inf$mu), ylim = c(0,1),
@@ -557,9 +537,6 @@ plot_power <- function(inf){
   legend("bottomright", legend = paste0("n=", unique(inf$n)),
          col = cols, lwd = 2, cex = .9)
 }
-png("E:/code/power_plot.png")
-plot_power(inf)
-dev.off()
 
 plot_power(inf)
 ```
@@ -575,19 +552,15 @@ Answer:
 1.  使用蒙特卡洛来模拟t区间并计算覆盖率：
 
 ```{r}
-rm(list = ls())
 gen_data <- function(n, m){
   set.seed(123)
   dat = replicate(m, rchisq(n, df = 2), simplify = FALSE)
   dat
 }
 dat = gen_data(n=20, m=1000)
-save(dat, file = "E:/code/gen_data2.RData")
 
 # ------------------------------------------
 
-rm(list = ls())
-load("E:/code/gen_data2.RData")
 infer_coverage <- function(dat, mu_true, alpha){
   n = length(dat[[1]])
   cover = sapply(dat, function(x) {
@@ -605,12 +578,9 @@ infer_coverage <- function(dat, mu_true, alpha){
 }
 
 inf = infer_coverage(dat, 2, 0.05)
-write.csv(inf, "E:/code/inf2.csv")
 
 # -------------------------------------------
 
-rm(list = ls())
-inf = read.csv("E:/code/inf2.csv")
 report_result <- function(inf){
   cat("\n Monte Carlo 估计结果 \n")
   print(inf)
@@ -622,19 +592,15 @@ report_result(inf)
 2.  按照Eg7.4中的正态分布区间计算覆盖率：
 
 ```{r}
-rm(list = ls())
 gen_data <- function(n, m){
   set.seed(123)
   dat = replicate(m, rchisq(n, df = 2), simplify = FALSE)
   dat
 }
 dat = gen_data(n=20, m=1000)
-save(dat, file = "E:/code/gen_data2.RData")
 
 # ------------------------------------------
 
-rm(list = ls())
-load("E:/code/gen_data2.RData")
 infer_coverage <- function(dat, mu_true, alpha){
   n = length(dat[[1]])
   cover = sapply(dat, function(x) {
@@ -652,12 +618,9 @@ infer_coverage <- function(dat, mu_true, alpha){
 }
 
 inf = infer_coverage(dat, 2, 0.05)
-write.csv(inf, "E:/code/inf2.csv")
 
 # -------------------------------------------
 
-rm(list = ls())
-inf = read.csv("E:/code/inf2.csv")
 report_result <- function(inf){
   cat("\n Monte Carlo 估计结果 \n")
   print(inf)
@@ -677,19 +640,15 @@ Answer:
 1.  U(0,2)分布：
 
 ```{r}
-rm(list = ls())
 gen_data <- function(n, m){
   set.seed(123)
   dat = replicate(m, runif(n, min = 0, max = 2), simplify = FALSE)
   dat
 }
 dat = gen_data(n=20, m=2000)
-save(dat, file = "E:/code/gen_data4.RData")
 
 # ------------------------------------------
 
-rm(list = ls())
-load("E:/code/gen_data4.RData")
 infer_t1e <- function(dat, mu_true, alpha){
   n = length(dat[[1]])
   pvals = sapply(dat, function(x)
@@ -699,12 +658,9 @@ infer_t1e <- function(dat, mu_true, alpha){
 }
 
 inf = infer_t1e(dat, 1, 0.05)
-write.csv(inf, "E:/code/inf4.csv")
 
 # -------------------------------------------
 
-rm(list = ls())
-inf = read.csv("E:/code/inf4.csv")
 report_result <- function(inf){
   cat("\n Monte Carlo 估计结果 \n")
   print(inf)
@@ -717,19 +673,15 @@ report_result(inf)
 2.  $\chi^2(1)$分布：
 
 ```{r}
-rm(list = ls())
 gen_data <- function(n, m){
   set.seed(123)
   dat = replicate(m, rchisq(n, df = 1), simplify = FALSE)
   dat
 }
 dat = gen_data(n=20, m=2000)
-save(dat, file = "E:/code/gen_data3.RData")
 
 # ------------------------------------------
 
-rm(list = ls())
-load("E:/code/gen_data3.RData")
 infer_t1e <- function(dat, mu_true, alpha){
   n = length(dat[[1]])
   pvals = sapply(dat, function(x)
@@ -739,12 +691,9 @@ infer_t1e <- function(dat, mu_true, alpha){
 }
 
 inf = infer_t1e(dat, 1, 0.05)
-write.csv(inf, "E:/code/inf3.csv")
 
 # -------------------------------------------
 
-rm(list = ls())
-inf = read.csv("E:/code/inf3.csv")
 report_result <- function(inf){
   cat("\n Monte Carlo 估计结果 \n")
   print(inf)
@@ -755,19 +704,15 @@ report_result(inf)
 3.  Exp(1)分布：
 
 ```{r}
-rm(list = ls())
 gen_data <- function(n, m){
   set.seed(123)
   dat = replicate(m, rexp(n, rate = 1), simplify = FALSE)
   dat
 }
 dat = gen_data(n=20, m=2000)
-save(dat, file = "E:/code/gen_data5.RData")
 
 # ------------------------------------------
 
-rm(list = ls())
-load("E:/code/gen_data5.RData")
 infer_t1e <- function(dat, mu_true, alpha){
   n = length(dat[[1]])
   pvals = sapply(dat, function(x)
@@ -777,12 +722,9 @@ infer_t1e <- function(dat, mu_true, alpha){
 }
 
 inf = infer_t1e(dat, 1, 0.05)
-write.csv(inf, "E:/code/inf5.csv")
 
 # -------------------------------------------
 
-rm(list = ls())
-inf = read.csv("E:/code/inf5.csv")
 report_result <- function(inf){
   cat("\n Monte Carlo 估计结果 \n")
   print(inf)
