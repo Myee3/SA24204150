@@ -2005,11 +2005,6 @@ List rw_theta_cpp(int N, double theta0, double w, NumericVector n) {
 }
 ```
 
-```{r}
-library(Rcpp)
-Rcpp::sourceCpp("E:/code/rw_theta.cpp")
-```
-
 ## Question2
 
 Compare the corresponding generated random numbers with those by the R function you wrote before using the function "qqplot".
